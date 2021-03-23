@@ -16,6 +16,12 @@ class back_test_bot(object):
         self.data = data.dropna()
 
     def strategy_init_(self, SMA1, SMA2, choice):
+         '''
+        :parameter
+        SMA1: shorter range day number
+        SMA2: longer range day number
+        Choice: 1 for SMA, you can develop more strategies in this class
+        '''
 
         self.SMA1 = SMA1
         self.SMA2 = SMA2
