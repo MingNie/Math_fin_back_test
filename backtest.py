@@ -4,9 +4,8 @@ import pandas as pd
 class back_test_bot(object):
     '''
     :parameter
-    strategy：trading strategy object
-    instrument: the financial instrument you are trading
-    data: the time series of the prices of one share
+    instrument: the financial instrument you are trading, string
+    data: the time series of the equity
 
     Author: Ming NIE
     All Rights Reserved
