@@ -47,7 +47,7 @@ class back_test_bot(object):
 
             print("---portfolio position established ...")
 
-            self.data['Returns'] = np.log(self.data['Adj Close'] / self.data['Adj Close'].shift(1))
+            self.data['Returns'] = self.data['Adj Close'] - self.data['Adj Close'].shift(1)
             print("---market returns calculated ...")
             self.data['Strategy'] = self.data['Position'].shift(1) * self.data['Returns']
             print("---strategy returns calculate ...")
@@ -70,7 +70,7 @@ class back_test_bot(object):
             self.data['Position'] = np.where(self.data['SMA1'] > self.data['SMA2'], 1, 0)
             print("---portfolio position established ...")
 
-            self.data['Returns'] = np.log(self.data['Adj Close'] / self.data['Adj Close'].shift(1))
+            self.data['Returns'] = self.data['Adj Close'] - self.data['Adj Close'].shift(1)
             print("---market returns calculated ...")
             self.data['Strategy'] = self.data['Position'].shift(1) * self.data['Returns']
             print("---strategy returns calculate ...")
