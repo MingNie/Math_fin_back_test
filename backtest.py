@@ -101,9 +101,9 @@ class back_test_bot(object):
         self.data['Position'].plot(ax=ax, secondary_y='Position', style='--')
         ax.get_legend().set_bbox_to_anchor((0.25, 0.85))
 
-    def summary(self):
+    def summary(self, year = 4):
         print("---- SMA: Sums up the returns for the strategy and the market")
-        print(self.sum/5)
+        print(self.sum/year)
         print("---The annualized volatility for the strategy and the market")
         print(self.std)
 
@@ -122,9 +122,9 @@ class back_test_bot(object):
         self.data['Position'].plot(ax=ax, secondary_y='Position', style='--')
         ax.get_legend().set_bbox_to_anchor((0.25, 0.85))
 
-    def ema_summary(self):
+    def ema_summary(self, year = 4):
         print("---- EMA: Sums up the returns for the strategy and the market")
-        print(self.sum/5)
+        print(self.sum/year)
         print("---The annualized volatility for the strategy and the market")
         print(self.std)
 
