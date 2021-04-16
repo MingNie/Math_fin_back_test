@@ -38,9 +38,9 @@ class back_test_bot(object):
 
 - `strategy`: the current trading strategy, 0 for simple moving strategy, 1 for exponential moving strategy, 2 for moving average convergence/divergence
 
-- `sum`: sum of the historical market returns of the financial instrument and trading strategy 
+- `sum`: sum of the historical market statistics of the financial instrument and trading strategy 
 
-- `std`: the volatility of the historical market returns of the financial instrument and trading strategy 
+- `std`: the volatility of the historical volatility of the financial instrument and trading strategy 
 
   
 
@@ -98,17 +98,17 @@ Take long position 1 when the condition is `TRUE`, otherwise take 0. (if allowed
 Print message to signal the establishment of the position.
 
 ```python
-self.data['Returns'] = self.data['Adj Close'] - self.data['Adj Close'].shift(1)
-print("---market returns calculated ...")
+self.data['Returns'] = np.log(self.data['Adj Close'] / self.data['Adj Close'].shift(1))
+print("---market Returns calculated ...")
 ```
 
-Calculate the historical market returns of the financial instrument and store in a new column named `returns` in our attribute `data` 
+Calculate the historical market Returns of the financial instrument and store in a new column named `returns` in our attribute `data` 
 
 Print message to signal the end of calculation process.
 
 ```python
 self.data['Strategy'] = self.data['Position'].shift(1) * self.data['Returns']
-print("---strategy returns calculate ...")
+print("---strategy Returns calculate ...")
 ```
 
 Calculate the historical returns of the trading strategy and store in a new column named `Strategy` in our attribute `data` 
@@ -117,7 +117,6 @@ Print message to signal the end of calculation process.
 
 ```python
 self.data.dropna(inplace=True)
-
 ```
 
 Delete the NA data created due to the truncated period for the calculation of the first position.
@@ -128,9 +127,9 @@ self.std = self.data[['Returns', 'Strategy']].std() * 252 ** 0.5
 print("---Congrats!!! all result generated, find daily data in results, find stats data in sum and std")
 ```
 
-Calculate the cumulative sum of the historical market returns of the financial instrument and trading strategy and store in attribute `sum` 
+Calculate the cumulative sum of the historical returns of the financial instrument and trading strategy and store in attribute `sum` 
 
-Calculate the annual volatility of the historical market returns of the financial instrument and trading strategy and store in attribute `std`
+Calculate the annual volatility of the financial instrument and trading strategy and store in attribute `std`
 
 Print message to signal the end of trading strategy application process.
 
@@ -158,7 +157,6 @@ Signal the plot method name
 
 ```python
         	ax = self.data[["Adj Close", "range1", "range2", "Position"]].plot(secondary_y='Position', figsize=(10, 6))
-
 ```
 Select the columns of `data`
 
@@ -187,7 +185,7 @@ Set the legend design
 ```python
 def summary(self, year = 4):
     if self.strategy == 0:
-        print("---- SMA: Sums up the returns for the strategy and the market")
+        print("---- SMA: Sums up the Returns for the strategy and the market")
         print(self.sum/year)
 ```
 
